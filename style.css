@@ -127,3 +127,7 @@ input[type="text"]:focus {
   align-items: center;
   display: flex;
 }
+
+.footer p {
+  text-align: center;
+}

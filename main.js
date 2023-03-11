@@ -1,36 +1,38 @@
-const cityField = document.querySelector("#city");
-const keyField = document.querySelector("#key");
-const submitButton = document.querySelector("#submit");
+const cityField = document.getElementById("city");
+const keyField = document.getElementById("key");
+const submitButton = document.getElementById("submit");
+const panel = document.getElementById("panel");
 
 const saveLocal = (city, key) => {
-    const isCityValid = city && typeof city === "string" && city.trim().length > 0;
-    const isKeyValid = key && typeof key === "string" && key.trim().length > 0;
+    const isCityValid = typeof city === "string" && city.trim().length > 0;
+    const isKeyValid = typeof key === "string" && key.trim().length > 0;
 
     if (isCityValid && isKeyValid) {
-        store.set('user', { city: city.trim(), key: key.trim() });
+        store.set("user", { city: city.trim(), key: key.trim() });
     } else {
         console.error("Incorrect values for city or key");
     }
 }
 
-submitButton.addEventListener("click", (event) => {
+submitButton.addEventListener("click", async (event) => {
     event.preventDefault();
 
-    const cityFieldValue = cityField && cityField.value ? cityField.value : '';
-    const keyFieldValue = keyField && keyField.value ? keyField.value : '';
+    const cityFieldValue = cityField?.value ?? "";
+    const keyFieldValue = keyField?.value ?? "";
 
     saveLocal(cityFieldValue, keyFieldValue);
 
-    const city = getLocal("city");
-    const key = getLocal("key");
+    const [city, key] = ["city", "key"].map((value) =>
+        getLocal(value)
+    );
 
     getWeather(city, key);
-});
+})
 
 const getLocal = (value) => {
     let localValue = "";
     try {
-        localValue = store.get('user')[value];
+        localValue = store.get("user")?.[value] ?? "";
     } catch (error) {
         console.error(error);
     }
@@ -57,18 +59,15 @@ function getWeather(city, key) {
         // define constants using const
         const API_URL = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${key}`;
 
-        // Use arrow function syntax for getapi
         const getapi = async (url) => {
-            try {
-                // fetch returns a promise that will reject if the response isn't ok
-                const response = await fetch(url);
-
-                // instead of storing JSON as a variable, return it directly from the function
-                return response.json();
-            } catch (error) {
-                console.error(error);
-                throw new Error(error.message);
-            }
+        try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`HTTP error ${response.status}`);
+            return response.json();
+        } catch (error) {
+            console.error(error);
+            throw new Error(error.message);
+        }
         }
 
         // Use arrow function syntax for showWeek
@@ -83,10 +82,9 @@ function getWeather(city, key) {
         // Use arrow function instead of named function
         const show = (data) => {
             // Destructure nested data object to get id and description values
-            const { id } = data.weather[0];
-            const { description } = data.weather[0];
+            const { id, description } = data.weather[0];
 
-            // Define icons based on their corresponding ids in an object rather than multiple arrays
+            // Define icons based on their corresponding ids as a Map
             const icons = {
                 '01d': [800],
                 '02d': [801],
@@ -124,5 +122,6 @@ function getWeather(city, key) {
 
             panel.innerHTML += `<div>${iconComponent}${tempComponent}</div>`;
         }
+
     }
 }

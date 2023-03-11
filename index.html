@@ -9,21 +9,24 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <header class="header">
+      <h1 class="heading"></h1>
+    </header>
     <div class="container">
       <main class="main">
-        <div class="form">
+        <form class="form" name="weather-form">
           <div class="field">
             <label for="city">City</label>
             <input type="text" name="city" id="city" />
           </div>
           <div class="field">
-            <label for="key"><a href="https://openweathermap.org/api">Api key</a></label>
+            <div class="key-label">
+              <label for="key"><a href="https://openweathermap.org/api">API Key</a></label>
+            </div>
             <input type="text" name="key" id="key" />
           </div>
-          <div>
-            <input type="button" id="submit" value="OK" />
-          </div>
-        </div>
+          <input id="submit" type="button" value="OK">
+        </form>
         <div id="panel">
           <!-- weather current info here -->
         </div>
@@ -32,6 +35,9 @@
         </div>
       </main>
     </div>
+    <footer class="footer">
+      <p>&copy; 2023 All Rights Reserved.</p>
+    </footer>
     <script src="./store.min.js"></script>
     <script>
       // store.clearAll()
