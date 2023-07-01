@@ -1,5 +1,6 @@
 import React from "react"
-import { WeatherData } from "../types/WeatherData"
+import { WeatherData } from "@/types/WeatherData"
+import Image from "next/image"
 
 interface WeatherCardProps {
   data: WeatherData
@@ -16,10 +17,12 @@ const WeatherCard: React.FC<WeatherCardProps> = ({ data }) => {
           <p className="text-4xl font-bold">{Math.round(main.temp)}°C</p>
           <p className="text-gray-600">{weather[0].description}</p>
         </div>
-        <img
+        <Image
           src={`http://openweathermap.org/img/wn/${weather[0].icon}.png`}
           alt={weather[0].description}
           className="h-16 w-16"
+          width={64}
+          height={64}
         />
       </div>
       <div className="mt-4">

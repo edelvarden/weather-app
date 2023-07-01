@@ -1,11 +1,11 @@
 "use client"
-import React, { useState } from "react"
 import Head from "next/head"
-import Layout from "../components/Layout"
-import SearchBar from "../components/SearchBar"
-import WeatherCard from "../components/WeatherCard"
-import { WeatherData } from "../types/WeatherData"
-import { getWeatherData } from "../utils/api"
+import React, { useState } from "react"
+import Layout from "@/components/Layout"
+import SearchBar from "@/components/SearchBar"
+import WeatherCard from "@/components/WeatherCard"
+import { WeatherData } from "@/types/WeatherData"
+import { getWeatherData } from "@/utils/api"
 
 const Home: React.FC = () => {
   const [weather, setWeather] = useState<WeatherData | null>(null)

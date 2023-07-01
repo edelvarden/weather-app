@@ -1,7 +1,12 @@
 import clsx from "clsx"
-import "./styles/globals.css"
+import "@/styles/globals.css"
 
 import { Poppins } from "next/font/google"
+
+export const metadata = {
+  title: "Weather App",
+  description: "Weather App written using Next.js 13 and the OpenWeather API"
+}
 
 const font = Poppins({
   subsets: ["latin"],

@@ -1,5 +1,5 @@
 import axios from "axios"
-import { WeatherData } from "../types/WeatherData"
+import { WeatherData } from "@/types/WeatherData"
 
 const API_KEY = process.env.NEXT_PUBLIC_OPEN_WEATHER_API_KEY
 
