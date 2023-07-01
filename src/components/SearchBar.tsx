@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 
 interface SearchBarProps {
   onSearch: (query: string) => void
@@ -15,7 +15,13 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
     event.preventDefault()
     onSearch(query)
     setQuery("")
+    localStorage.setItem("city", query)
   }
+
+  useEffect(() => {
+    const storedCity = localStorage.getItem("city")
+    if (storedCity) onSearch(storedCity)
+  }, [onSearch])
 
   return (
     <form onSubmit={handleSubmit} className="flex items-center">

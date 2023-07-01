@@ -1,5 +1,4 @@
 "use client"
-import Head from "next/head"
 import React, { useState } from "react"
 import Layout from "@/components/Layout"
 import SearchBar from "@/components/SearchBar"
@@ -24,9 +23,6 @@ const Home: React.FC = () => {
 
   return (
     <Layout>
-      <Head>
-        <title>Weather App</title>
-      </Head>
       <div className="mx-auto max-w-md">
         <SearchBar onSearch={handleSearch} />
         {error && <p className="mt-2 text-red-500">{error}</p>}
