@@ -1,4 +1,4 @@
-'use client'
+"use client"
 import React, { useState } from "react"
 import Head from "next/head"
 import Layout from "../components/Layout"
@@ -27,9 +27,9 @@ const Home: React.FC = () => {
       <Head>
         <title>Weather App</title>
       </Head>
-      <div className="max-w-md mx-auto">
+      <div className="mx-auto max-w-md">
         <SearchBar onSearch={handleSearch} />
-        {error && <p className="text-red-500 mt-2">{error}</p>}
+        {error && <p className="mt-2 text-red-500">{error}</p>}
         {weather && <WeatherCard data={weather} />}
       </div>
     </Layout>

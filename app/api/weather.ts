@@ -3,10 +3,7 @@ import axios from "axios"
 
 const API_KEY = process.env.NEXT_PUBLIC_OPEN_WEATHER_API_KEY ?? ""
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "GET") {
     res.status(405).json({ message: "Method Not Allowed" })
     return
