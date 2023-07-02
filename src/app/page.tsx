@@ -1,5 +1,6 @@
 "use client"
 import React, { useState } from "react"
+import { debounce } from "lodash"
 import Layout from "@/components/Layout"
 import SearchBar from "@/components/SearchBar"
 import WeatherCard from "@/components/WeatherCard"
@@ -10,7 +11,7 @@ const Home: React.FC = () => {
   const [weather, setWeather] = useState<WeatherData | null>(null)
   const [error, setError] = useState<string | null>(null)
 
-  const handleSearch = async (query: string) => {
+  const debouncedSearch = debounce(async (query: string) => {
     try {
       const data = await getWeatherData(query)
       setWeather(data)
@@ -19,6 +20,10 @@ const Home: React.FC = () => {
       setWeather(null)
       setError("Failed to fetch weather data. Please try again.")
     }
+  }, 500)
+
+  const handleSearch = (query: string) => {
+    debouncedSearch(query)
   }
 
   return (
